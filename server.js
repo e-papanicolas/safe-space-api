@@ -22,9 +22,9 @@ app.use("/user", userRoutes);
 // const corsOptions = {origin: "http://localhost:____"};
 // app.use(cors(corsOptions));
 
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 app.get("/", (req, res, next) => {
   res.send("Hello World!");
