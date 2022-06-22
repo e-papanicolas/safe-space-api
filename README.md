@@ -1,2 +1,3 @@
-# safe-space-api
-A web portal solution prototype for SafePlace International's LGBTQ+ refugees.
+# pride-equalithon
+
+Hackathon: A web portal solution for Safe Place International's LGBTQ+ refugees.
