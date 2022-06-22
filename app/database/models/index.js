@@ -1,7 +1,5 @@
 import { Sequelize } from "sequelize";
 import User from "./user.model.js";
-
-// const config = require(__dirname + "/../config/config.json")[env];
 import config from "../config/config.json" assert { type: "json" };
 
 const sequelize = new Sequelize(
@@ -23,4 +21,4 @@ try {
   console.error("unable to connect to database");
 }
 
-export { db, sequelize };
+export { db };
