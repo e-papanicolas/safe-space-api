@@ -9,7 +9,7 @@ import {
 } from "../helpers/tokens.js";
 import { db } from "../database/models/index.js";
 
-const Users = db.users;
+const User = db.users;
 const userActions = {};
 
 userActions.new = async (req, res, next) => {
@@ -19,7 +19,7 @@ userActions.new = async (req, res, next) => {
   }
   // create instance and save to db
   try {
-    let newUser = await Users.findOne({
+    let newUser = await User.findOne({
       where: { username: req.body.username },
     });
     if (newUser) return res.status(400).json({ message: "username is taken" });
@@ -27,7 +27,7 @@ userActions.new = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const pswd = await bcrypt.hash(req.body.password, salt);
     // create the instance with the hashed password
-    newUser = Users.build({
+    newUser = User.build({
       username: req.body.username,
       email: req.body.email,
       password: pswd,
@@ -56,7 +56,7 @@ userActions.login = async (req, res, next) => {
   const { username, password } = req.body;
 
   try {
-    let user = await Users.findOne({
+    let user = await User.findOne({
       where: { username: username },
     });
     if (!user) return res.status(404).json({ message: "invalid username" });
@@ -95,7 +95,7 @@ userActions.tokenRefresh = async (req, res, next) => {
 
 userActions.getAll = async (req, res, next) => {
   try {
-    const allUsers = await Users.findAll();
+    const allUsers = await User.findAll();
     res.status(200).json(allUsers);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -105,7 +105,7 @@ userActions.getAll = async (req, res, next) => {
 userActions.getOne = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const user = await Users.findByPk(id);
+    const user = await User.findByPk(id);
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -115,7 +115,7 @@ userActions.getOne = async (req, res, next) => {
 userActions.updateOne = async (req, res, next) => {
   try {
     const id = req.params.id;
-    let updatedUser = await Users.findByPk(id);
+    let updatedUser = await User.findByPk(id);
     await updatedUser.update(req.body);
     await updatedUser.save();
     res.status(200).json(updatedUser);
@@ -127,7 +127,7 @@ userActions.updateOne = async (req, res, next) => {
 userActions.destroyOne = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const userToDelete = await Users.findByPk(id);
+    const userToDelete = await User.findByPk(id);
     await userToDelete.destroy();
     res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
@@ -137,9 +137,9 @@ userActions.destroyOne = async (req, res, next) => {
 
 // userActions.destroyAll = async (req, res, next) => {
 //   try {
-//     const users = await Users.findAll();
+//     const users = await User.findAll();
 //     users.forEach(async (user) => {
-//       await Users.destroy({ where: { id: user.id } });
+//       await User.destroy({ where: { id: user.id } });
 //     });
 //     return res.status(200).json({ message: "all users deleted successfully" });
 //   } catch (err) {
