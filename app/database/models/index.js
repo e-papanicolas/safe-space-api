@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
-import Users from "./user.model.js";
+import User from "./user.model.js";
+import Profile from "./profile.model.js";
 import config from "../config/config.json" assert { type: "json" };
 
 const sequelize = new Sequelize(
@@ -11,7 +12,8 @@ const sequelize = new Sequelize(
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-db.users = Users(sequelize);
+db.users = User;
+db.profiles = Profile;
 
 // test the connection to the database
 try {
