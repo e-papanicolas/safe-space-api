@@ -18,6 +18,7 @@ const Profile = sequelize.define(
     about: DataTypes.STRING,
     interests: DataTypes.STRING,
     userId: DataTypes.INTEGER,
+    profileId: DataTypes.INTEGER,
   },
   {}
 );
