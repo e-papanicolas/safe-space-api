@@ -4,7 +4,7 @@ import cors from "cors";
 import helmet from "helmet";
 import "dotenv/config";
 import { db } from "./app/database/models/index.js";
-import { userRoutes } from "./app/routes/index.js";
+import { userRoutes, profileRoutes } from "./app/routes/index.js";
 
 const app = express();
 const port = process.env.PORT || 8081;
@@ -17,14 +17,15 @@ app.use(cors());
 
 //user routes
 app.use("/user", userRoutes);
+app.use("/profile", profileRoutes);
 
 // * change cors configuration to this when running with a front end
 // const corsOptions = {origin: "http://localhost:____"};
 // app.use(cors(corsOptions));
 
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
 
 app.get("/", (req, res, next) => {
   res.send("Hello World!");
