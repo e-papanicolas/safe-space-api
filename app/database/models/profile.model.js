@@ -17,12 +17,13 @@ const Profile = sequelize.define(
     country: DataTypes.STRING,
     about: DataTypes.STRING,
     interests: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
   },
   {}
 );
 
 Profile.associate = (models) => {
-  Profile.belongsTo(models.User, { foreignKey: "userId", as: "user" });
+  Profile.belongsTo(models.users, { foreignKey: "userId", as: "user" });
 };
 
 export default Profile;

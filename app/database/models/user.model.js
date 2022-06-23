@@ -35,7 +35,7 @@ const User = sequelize.define(
 );
 
 User.associate = (models) => {
-  User.hasOne(models.Profile, { as: "profile" });
+  User.hasOne(models.profiles, { as: "profile" });
 };
 
 export default User;

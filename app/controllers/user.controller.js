@@ -9,6 +9,7 @@ import {
 import { db } from "../database/models/index.js";
 
 const User = db.users;
+const Profile = db.profiles;
 const userActions = {};
 
 userActions.new = async (req, res, next) => {
@@ -32,6 +33,11 @@ userActions.new = async (req, res, next) => {
       password: pswd,
     });
     await newUser.save();
+    // const newProfile = Profile.create({
+    //   userId: newUser.id,
+    // });
+    // newUser.profile = newProfile;
+    // await newUser.save();
 
     // payload for signing the JWT token
     const payload = {
