@@ -11,11 +11,11 @@ userRoutes.post("/login", userActions.login);
 // refresh tokens
 userRoutes.post("/refresh", userActions.tokenRefresh);
 // retrieve all Users
-userRoutes.get("/", auth, userActions.getAll);
+userRoutes.get("/", userActions.getAll);
 // retrieve a single user with id
-userRoutes.get("/:id", auth, userActions.getOne);
+userRoutes.get("/:id", userActions.getOne);
 // update a user with an id
-userRoutes.put("/:id", auth, userActions.updateOne);
+userRoutes.put("/:id", userActions.updateOne);
 // delete a user with an id
 userRoutes.delete("/:id", auth, userActions.destroyOne);
 
