@@ -3,3 +3,6 @@ import express from "express";
 import auth from "../middleware/auth.js";
 
 const profileRoutes = express.Router();
+
+// update profile
+profileRoutes.put("/update", profileActions.updateProfile);
