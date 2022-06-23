@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import User from "./user.model.js";
 import Profile from "./profile.model.js";
-import config from "../config/config.json" assert { type: "json" };
+import config from "../config/config.js";
 
 const sequelize = new Sequelize(
   config.development.database,
