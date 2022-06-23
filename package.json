@@ -29,6 +29,7 @@
     "bcrypt": "^5.0.1",
     "chai": "^4.3.6",
     "chai-http": "^4.3.0",
+    "cloudinary": "^1.30.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -36,7 +37,10 @@
     "jsonwebtoken": "^8.5.1",
     "mocha": "^10.0.0",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
     "nodemon": "^2.0.16",
+    "path": "^0.12.7",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.21.0"
