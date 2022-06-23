@@ -38,7 +38,7 @@ userActions.new = async (req, res, next) => {
     // });
     // newUser.profile = newProfile;
     // await newUser.save();
-
+    // console.log(newUser);
     // payload for signing the JWT token
     const payload = {
       user: {
