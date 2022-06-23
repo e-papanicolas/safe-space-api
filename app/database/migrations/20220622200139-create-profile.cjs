@@ -44,6 +44,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+      profileId: {
+        type: Sequelize.INTEGER,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
