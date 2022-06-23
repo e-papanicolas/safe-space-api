@@ -1,6 +1,5 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
 import {
   generateRefreshToken,
   generateAccessToken,
@@ -134,17 +133,5 @@ userActions.destroyOne = async (req, res, next) => {
     res.status(500).json({ message: err.message });
   }
 };
-
-// userActions.destroyAll = async (req, res, next) => {
-//   try {
-//     const users = await User.findAll();
-//     users.forEach(async (user) => {
-//       await User.destroy({ where: { id: user.id } });
-//     });
-//     return res.status(200).json({ message: "all users deleted successfully" });
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// };
 
 export default userActions;
