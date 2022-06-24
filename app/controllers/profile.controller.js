@@ -11,7 +11,7 @@ profileActions.new = async (req, res, next) => {
       userId: userId,
       nickname: req.body.nickname,
     });
-    console.log(profile.user);
+    console.log(profile);
     await profile.save();
     res.status(200).json(profile);
   } catch (err) {
@@ -21,7 +21,7 @@ profileActions.new = async (req, res, next) => {
 
 profileActions.updateProfile = async (req, res, next) => {
   try {
-    let user = User.findByPk(req.params.id);
+    let user = await User.findByPk(req.params.id);
     let profile = (await Profile.findOne({ where: { user: user.id } })) || null;
     if (profile) {
       profileActions.update(req.body);

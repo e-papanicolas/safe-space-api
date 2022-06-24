@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 import config from "../config/config.js";
+import Profile from "./profile.model.js";
 
 const sequelize = new Sequelize(
   config.development.database,
@@ -30,12 +31,18 @@ const User = sequelize.define(
         len: [3 - 18],
       },
     },
+    // my_profile: {
+    //   type: DataTypes.VIRTUAL,
+    //   get() {
+    //     return Profile.findOne({ where: { userId: this.id } });
+    //   },
+    // },
   },
   {}
 );
 
 User.associate = (models) => {
-  User.hasOne(models.profiles, { as: "profile" });
+  User.hasOne(models.profiles, { foreignKey: "userId" });
 };
 
 export default User;

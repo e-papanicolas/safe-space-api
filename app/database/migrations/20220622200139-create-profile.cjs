@@ -11,11 +11,11 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
         references: {
-          model: {
-            tableName: "Users",
-          },
+          model: "Users",
           key: "id",
+          as: "userId",
         },
       },
       avatar: {
@@ -44,9 +44,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      profileId: {
-        type: Sequelize.INTEGER,
-      },
+      // profileId: {
+      //   type: Sequelize.INTEGER,
+      // },
     });
   },
   async down(queryInterface, Sequelize) {

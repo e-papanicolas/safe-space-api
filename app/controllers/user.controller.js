@@ -33,12 +33,8 @@ userActions.new = async (req, res, next) => {
       password: pswd,
     });
     await newUser.save();
-    // const newProfile = Profile.create({
-    //   userId: newUser.id,
-    // });
-    // newUser.profile = newProfile;
-    // await newUser.save();
-    // console.log(newUser);
+    console.log(newUser);
+
     // payload for signing the JWT token
     const payload = {
       user: {
@@ -88,7 +84,6 @@ userActions.tokenRefresh = async (req, res, next) => {
   const data = req.body;
   if (data.refreshToken && data.refreshToken in refreshList) {
     const decoded = jwt.verify(data.refreshToken, process.env.JWT_R_KEY);
-    console.log(decoded);
     const token = generateAccessToken(decoded.user);
     const refreshToken = generateRefreshToken(decoded.user);
     addTokenToList(refreshToken, token);
@@ -100,7 +95,13 @@ userActions.tokenRefresh = async (req, res, next) => {
 
 userActions.getAll = async (req, res, next) => {
   try {
-    const allUsers = await User.findAll();
+    const allUsers = await User.findAll({
+      include: [
+        {
+          model: Profile,
+        },
+      ],
+    });
     res.status(200).json(allUsers);
   } catch (err) {
     res.status(500).json({ message: err.message });
