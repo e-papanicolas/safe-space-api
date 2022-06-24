@@ -1,7 +1,9 @@
 import { Sequelize } from "sequelize";
+import config from "../config/config.js";
 import User from "./user.model.js";
 import Profile from "./profile.model.js";
-import config from "../config/config.js";
+import Post from "./post.model.js";
+import Comment from "./comment.model.js";
 
 const sequelize = new Sequelize(
   config.development.database,
@@ -14,6 +16,8 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.users = User;
 db.profiles = Profile;
+db.posts = Post;
+db.comments = Comment;
 
 // test the connection to the database
 try {
