@@ -4,7 +4,12 @@ import cors from "cors";
 import helmet from "helmet";
 import "dotenv/config";
 import { db } from "./app/database/models/index.js";
-import { userRoutes, profileRoutes } from "./app/routes/index.js";
+import {
+  userRoutes,
+  profileRoutes,
+  commentRoutes,
+  postRoutes,
+} from "./app/routes/index.js";
 
 const app = express();
 const port = process.env.PORT || 8081;
@@ -18,6 +23,8 @@ app.use(cors());
 //user routes
 app.use("/user", userRoutes);
 app.use("/profile", profileRoutes);
+app.use("/post", postRoutes);
+app.use("/comment", commentRoutes);
 
 // * change cors configuration to this when running with a front end
 // const corsOptions = {origin: "http://localhost:____"};
