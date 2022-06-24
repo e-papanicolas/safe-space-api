@@ -6,7 +6,6 @@ import profileActions from "../controllers/profile.controller.js";
 const profileRoutes = express.Router();
 
 // update profile
-profileRoutes.put("/:id", profileActions.updateProfile);
-profileRoutes.post("/:id", profileActions.new);
+profileRoutes.put("/:id", avatarUpload, profileActions.updateProfile);
 
 export default profileRoutes;
