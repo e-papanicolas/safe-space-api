@@ -18,13 +18,15 @@ const Profile = sequelize.define(
     about: DataTypes.STRING,
     interests: DataTypes.STRING,
     userId: DataTypes.INTEGER,
-    profileId: DataTypes.INTEGER,
   },
   {}
 );
 
 Profile.associate = (models) => {
-  Profile.belongsTo(models.users, { foreignKey: "userId", as: "user" });
+  Profile.belongsTo(models.users, {
+    foreignKey: "userId",
+    onDelete: "CASCADE",
+  });
 };
 
 export default Profile;
