@@ -8,36 +8,37 @@ const sequelize = new Sequelize(
   config.development
 );
 
-const User = sequelize.define(
-  "User",
+const Post = sequelize.define(
+  "Post",
   {
-    username: {
+    content: {
       type: DataTypes.STRING,
-      unique: true,
       validate: {
         notEmpty: true,
       },
     },
-    email: {
+    image: {
       type: DataTypes.STRING,
-      validate: {
-        isEmail: true,
-      },
     },
-    password: {
+    userId: {
       type: DataTypes.STRING,
       validate: {
-        len: [3 - 18],
+        allowNull: false,
       },
     },
   },
   {}
 );
 
-User.associate = (models) => {
-  User.hasOne(models.profiles, { foreignKey: "userId" });
-  User.hasMany(models.posts, { foreignKey: "userId" });
-  User.hasMany(models.comments, { foreignKey: "userId" });
+Post.associate = (models) => {
+  Post.belongsTo(models.users, {
+    foreignKey: "userId",
+    onDelete: "CASCADE",
+  });
+  Post.hasMany(models.comments, {
+    foreignKey: "postId",
+    onDelete: "CASCADE",
+  });
 };
 
-export default User;
+export default Post;

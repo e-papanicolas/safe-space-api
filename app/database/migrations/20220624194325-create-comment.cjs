@@ -1,13 +1,15 @@
 "use strict";
-
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Profiles", {
+    await queryInterface.createTable("Comments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
+      },
+      content: {
+        type: Sequelize.STRING,
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -18,23 +20,14 @@ module.exports = {
           as: "userId",
         },
       },
-      avatar: {
-        type: Sequelize.STRING,
-      },
-      nickname: {
-        type: Sequelize.STRING,
-      },
-      pronouns: {
-        type: Sequelize.STRING,
-      },
-      country: {
-        type: Sequelize.STRING,
-      },
-      about: {
-        type: Sequelize.STRING,
-      },
-      interests: {
-        type: Sequelize.STRING,
+      postId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: "Posts",
+          key: "id",
+          as: "postId",
+        },
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Profiles");
+    await queryInterface.dropTable("Comments");
   },
 };

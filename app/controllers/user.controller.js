@@ -10,6 +10,7 @@ import { db } from "../database/models/index.js";
 
 const User = db.users;
 const Profile = db.profiles;
+const Post = db.posts;
 const userActions = {};
 
 // POST creates new user and returns user + tokens
@@ -115,6 +116,9 @@ userActions.getOne = async (req, res, next) => {
       include: [
         {
           model: Profile,
+        },
+        {
+          model: Post,
         },
       ],
     });
