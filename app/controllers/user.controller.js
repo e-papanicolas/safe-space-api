@@ -12,6 +12,7 @@ const User = db.users;
 const Profile = db.profiles;
 const userActions = {};
 
+// POST creates new user and returns user + tokens
 userActions.new = async (req, res, next) => {
   // validate request
   if (!req.body.username) {
@@ -53,6 +54,7 @@ userActions.new = async (req, res, next) => {
   }
 };
 
+// POST logs user in and sends tokens
 userActions.login = async (req, res, next) => {
   const { username, password } = req.body;
 
@@ -80,6 +82,7 @@ userActions.login = async (req, res, next) => {
   }
 };
 
+// refresh tokens
 userActions.tokenRefresh = async (req, res, next) => {
   const data = req.body;
   if (data.refreshToken && data.refreshToken in refreshList) {
@@ -93,31 +96,35 @@ userActions.tokenRefresh = async (req, res, next) => {
   }
 };
 
+// GET all users - just user info, does not include profile
 userActions.getAll = async (req, res, next) => {
   try {
-    const allUsers = await User.findAll({
-      include: [
-        {
-          model: Profile,
-        },
-      ],
-    });
+    const allUsers = await User.findAll();
     res.status(200).json(allUsers);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
+// GET one user by id, returns user + profile
 userActions.getOne = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const user = await User.findByPk(id);
+    const user = await User.findOne({
+      where: { id: id },
+      include: [
+        {
+          model: Profile,
+        },
+      ],
+    });
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
+// PUT updates user information only, use PUT to profile for profile info
 userActions.updateOne = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -130,6 +137,7 @@ userActions.updateOne = async (req, res, next) => {
   }
 };
 
+// DELETE one user, deletes associated profile also
 userActions.destroyOne = async (req, res, next) => {
   try {
     const id = req.params.id;
