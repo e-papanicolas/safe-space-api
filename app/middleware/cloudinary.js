@@ -15,14 +15,10 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const parser = multer({ storage: storage });
+export const parser = multer({ storage: storage });
 
 const avatarUpload = async (req, res, next) => {
-  console.log("in middleware");
-  parser.single("image");
-  console.log("after parser");
   const avatar = req.file.path;
-  console.log(avatar);
   req.body.avatar = avatar;
   next();
 };
