@@ -44,4 +44,17 @@ Comment.associate = (models) => {
   });
 };
 
+// ! this has the has many through
+// Comment.associate = (models) => {
+//   Comment.belongsTo(models.users, {
+//     foreignKey: "userId",
+//     onDelete: "CASCADE",
+//     through: "Posts",
+//   });
+//   Comment.belongsTo(models.comments, {
+//     foreignKey: "postId",
+//     onDelete: "CASCADE",
+//   });
+// };
+
 export default Comment;

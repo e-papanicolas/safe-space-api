@@ -40,4 +40,11 @@ User.associate = (models) => {
   User.hasMany(models.comments, { foreignKey: "userId" });
 };
 
+//  ! this has the has many through
+// User.associate = (models) => {
+//   User.hasOne(models.profiles, { foreignKey: "userId" });
+//   User.hasMany(models.posts, { foreignKey: "userId" });
+//   User.hasMany(models.comments, { foreignKey: "userId", through: "Posts" });
+// };
+
 export default User;
