@@ -18,15 +18,15 @@ const Comment = sequelize.define(
       },
     },
     userId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       validate: {
-        allowNull: false,
+        // allowNull: false,
       },
     },
     postId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       validate: {
-        allowNull: false,
+        // allowNull: false,
       },
     },
   },
