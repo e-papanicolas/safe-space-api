@@ -13,7 +13,7 @@ const generateAccessToken = (payload) => {
 
 const generateRefreshToken = (payload) => {
   return jwt.sign(payload, process.env.JWT_R_KEY, {
-    expiresIn: "30d",
+    expiresIn: "2h",
   });
 };
 
