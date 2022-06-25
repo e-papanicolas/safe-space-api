@@ -3,9 +3,13 @@ import { db } from "../database/models/index.js";
 const Profile = db.profiles;
 const profileActions = {};
 
+/**
+ * PUT /:id
+ * @param {integer} id - user id
+ * @function
+ * Returns the user's profile.
+ */
 profileActions.updateProfile = async (req, res, next) => {
-  console.log("in profile action");
-  console.log(req.body);
   const id = req.params.id;
   const { avatar, nickname, pronouns, country, about, interests } = req.body;
   try {

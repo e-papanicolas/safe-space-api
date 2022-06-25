@@ -5,6 +5,12 @@ const User = db.users;
 const Comment = db.comments;
 const postActions = {};
 
+/**
+ * POST /
+ * Creates a new post.
+ * @function
+ * Returns the new post.
+ */
 postActions.new = async (req, res, next) => {
   // validate request
   if (!req.body.userId) {
@@ -23,7 +29,12 @@ postActions.new = async (req, res, next) => {
   }
 };
 
-// get all posts for a single user with userId [with comments](not yet)
+/**
+ * GET /:id
+ * @param {integer} id - userId
+ * @function
+ * Returns all posts associated with the userId.
+ */
 // TODO: figure out how to get the nested Post.Comments
 postActions.getOne = async (req, res, next) => {
   const id = req.params.id;
@@ -42,12 +53,17 @@ postActions.getOne = async (req, res, next) => {
   }
 };
 
-// get ALL recent posts for the feed
-// TODO: find out how many Liam wants
+/**
+ * GET /
+ * @function
+ * Returns recent {#} posts.
+ */
+// TODO: make sure this is most recent
 postActions.getAll = async (req, res, next) => {
+  const limit = 100;
   try {
     const posts = await Post.findAll({
-      limit: 100,
+      limit: limit,
       include: [
         {
           model: Comment,
@@ -60,7 +76,13 @@ postActions.getAll = async (req, res, next) => {
   }
 };
 
-// updates a post, returns just the post
+/**
+ * PUT /:id
+ * @param {integer} id - postId
+ * @function
+ * Updates the post with anything in the body of the req.
+ * Return the updated post.
+ */
 postActions.updateOne = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -73,7 +95,12 @@ postActions.updateOne = async (req, res, next) => {
   }
 };
 
-// deletes a post and its associated comments
+/**
+ * DELETE /:id
+ * @param {integer} id - postId
+ * @function
+ * Deletes the post and its associated comments.
+ */
 postActions.destroyOne = async (req, res, next) => {
   try {
     const id = req.params.id;

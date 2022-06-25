@@ -4,6 +4,12 @@ const Comment = db.comments;
 const Post = db.posts;
 const commentActions = {};
 
+/**
+ * POST /
+ * Creates a new comment.
+ * @function
+ * Returns the new comment.
+ */
 commentActions.new = async (req, res, next) => {
   // validate request
   if (!req.body.postId) {
@@ -23,7 +29,12 @@ commentActions.new = async (req, res, next) => {
   }
 };
 
-// get all comments for one post with postId
+/**
+ * GET /:id
+ * @param {String} id - postId
+ * @function
+ * Returns all comments associated with the post
+ */
 commentActions.getOne = async (req, res, next) => {
   const id = req.params.id;
   try {
@@ -41,6 +52,12 @@ commentActions.getOne = async (req, res, next) => {
   }
 };
 
+/**
+ * DELETE /:id
+ * @param {integer} id
+ * @function
+ * Deletes the comment by id
+ */
 commentActions.destroyOne = async (req, res, next) => {
   try {
     const id = req.params.id;

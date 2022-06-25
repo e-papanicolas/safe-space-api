@@ -13,7 +13,12 @@ const Profile = db.profiles;
 const Post = db.posts;
 const userActions = {};
 
-// POST creates new user and returns user + tokens
+/**
+ * POST /
+ * @function
+ * Creates a new user.
+ * Returns the new user, JWT tokens and refresh tokens.
+ */
 userActions.new = async (req, res, next) => {
   // validate request
   if (!req.body.username) {
@@ -55,7 +60,12 @@ userActions.new = async (req, res, next) => {
   }
 };
 
-// POST logs user in and sends tokens
+/**
+ * POST /login
+ * @function
+ * Authenticates and logs in user.
+ * Returns the user, JWT tokens and refresh tokens.
+ */
 userActions.login = async (req, res, next) => {
   const { username, password } = req.body;
 
@@ -83,7 +93,12 @@ userActions.login = async (req, res, next) => {
   }
 };
 
-// refresh tokens
+/**
+ * POST /refresh
+ * @function
+ * Authenticates tokens, refresh tokens, issues new tokens.
+ * Returns the new user, JWT tokens and refresh tokens.
+ */
 userActions.tokenRefresh = async (req, res, next) => {
   const data = req.body;
   if (data.refreshToken && data.refreshToken in refreshList) {
@@ -97,7 +112,11 @@ userActions.tokenRefresh = async (req, res, next) => {
   }
 };
 
-// GET all users - just user info, does not include profile
+/**
+ * GET /
+ * @function
+ * Returns a list of all users with account information, not profile.
+ */
 userActions.getAll = async (req, res, next) => {
   try {
     const allUsers = await User.findAll();
@@ -107,7 +126,12 @@ userActions.getAll = async (req, res, next) => {
   }
 };
 
-// GET one user by id, returns user + profile
+/**
+ * GET /:id
+ * @param {integer} id - userId
+ * @function
+ * Returns the user with all  associated  models.
+ */
 userActions.getOne = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -128,7 +152,13 @@ userActions.getOne = async (req, res, next) => {
   }
 };
 
-// PUT updates user information only, use PUT to profile for profile info
+/**
+ * PUT /:id
+ * @param {integer} id - userId
+ * @function
+ * Updates user account information.
+ * Returns the updated user.
+ */
 userActions.updateOne = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -141,7 +171,12 @@ userActions.updateOne = async (req, res, next) => {
   }
 };
 
-// DELETE one user, deletes associated profile also
+/**
+ * DELETE /:id
+ * @param {integer} id - userId
+ * @function
+ * Deletes the user and all associated models.
+ */
 userActions.destroyOne = async (req, res, next) => {
   try {
     const id = req.params.id;
