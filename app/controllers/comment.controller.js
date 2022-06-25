@@ -31,7 +31,7 @@ commentActions.new = async (req, res, next) => {
 
 /**
  * GET /:id
- * @param {String} id - postId
+ * @param {integer} id - postId
  * @function
  * Returns all comments associated with the post
  */
@@ -54,7 +54,7 @@ commentActions.getOne = async (req, res, next) => {
 
 /**
  * DELETE /:id
- * @param {integer} id
+ * @param {integer} id - commentId
  * @function
  * Deletes the comment by id
  */
