@@ -15,7 +15,7 @@ const storage = new CloudinaryStorage({
   },
 });
 
-export const parser = multer({ storage: storage });
+const parser = multer({ storage: storage });
 
 const avatarUpload = async (req, res, next) => {
   const avatar = req.file.path;
@@ -23,4 +23,10 @@ const avatarUpload = async (req, res, next) => {
   next();
 };
 
-export default avatarUpload;
+const imageUpload = async (req, res, next) => {
+  const image = req.file.path;
+  req.body.image = image;
+  next();
+};
+
+export { avatarUpload, imageUpload, parser };
