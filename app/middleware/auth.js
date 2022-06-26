@@ -1,5 +1,12 @@
 import jwt from "jsonwebtoken";
 
+/**
+ * @function
+ * This middleware is on ALL protected routes.
+ * Detaches the token from the Authorization header.
+ * If token is valid, attaches the user to the request body
+ * and passes it to the next middleware in the route.
+ */
 const auth = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {

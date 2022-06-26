@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-//user routes
+// use routes
 app.use("/user", userRoutes);
 app.use("/profile", profileRoutes);
 app.use("/post", postRoutes);
@@ -30,6 +30,11 @@ app.use("/comment", commentRoutes);
 // const corsOptions = {origin: "http://localhost:____"};
 // app.use(cors(corsOptions));
 
+/**
+ * @function
+ * Forces the database to sync with models.
+ * Should only be used for development.
+ */
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
 });

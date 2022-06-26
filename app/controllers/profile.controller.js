@@ -14,7 +14,7 @@ profileActions.updateProfile = async (req, res, next) => {
   const { avatar, nickname, pronouns, country, about, interests } = req.body;
   try {
     const [profile, created] = await Profile.findOrCreate({
-      where: { id: id },
+      where: { userId: id },
       defaults: {
         userId: id,
         avatar,
@@ -28,7 +28,7 @@ profileActions.updateProfile = async (req, res, next) => {
     if (created) {
       res.status(200).json({ profile });
     } else {
-      // it is not created, need to update it
+      // it is not newly created, need to update it
       await profile.update({
         userId: id,
         avatar,
