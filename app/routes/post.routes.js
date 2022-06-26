@@ -8,7 +8,12 @@ const postRoutes = express.Router();
 postRoutes.post("/", parser.single("image"), imageUpload, postActions.new);
 postRoutes.get("/:id", postActions.getOne);
 postRoutes.get("/", postActions.getAll);
-postRoutes.put("/:id", postActions.updateOne);
+postRoutes.put(
+  "/:id",
+  parser.single("image"),
+  imageUpload,
+  postActions.updateOne
+);
 postRoutes.delete("/:id", postActions.destroyOne);
 
 export default postRoutes;
