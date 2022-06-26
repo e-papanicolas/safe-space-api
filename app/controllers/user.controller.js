@@ -53,7 +53,7 @@ userActions.new = async (req, res, next) => {
     const token = generateAccessToken(payload);
     const refreshToken = generateRefreshToken(payload);
     addTokenToList(refreshToken, token);
-
+    newUser = User.serialize(newUser);
     res.status(200).json({ token, refreshToken, newUser });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -87,6 +87,7 @@ userActions.login = async (req, res, next) => {
     const token = generateAccessToken(payload);
     const refreshToken = generateRefreshToken(payload);
     addTokenToList(refreshToken, token);
+    user = User.serialize(user);
     res.status(200).json({ user, token, refreshToken });
   } catch (err) {
     return res.status(401).json({ message: err.message });
@@ -106,7 +107,8 @@ userActions.tokenRefresh = async (req, res, next) => {
     const token = generateAccessToken(decoded.user);
     const refreshToken = generateRefreshToken(decoded.user);
     addTokenToList(refreshToken, token);
-    res.status(200).json({ user: decoded.user, token, refreshToken });
+    let user = User.serialize(decoded.user);
+    res.status(200).json({ user, token, refreshToken });
   } else {
     res.status(401).json({ message: "Invalid refresh token" });
   }
@@ -120,7 +122,7 @@ userActions.tokenRefresh = async (req, res, next) => {
 userActions.getAll = async (req, res, next) => {
   try {
     const allUsers = await User.findAll();
-    res.status(200).json(allUsers);
+    res.status(200).json(User.serializeMany(allUsers));
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -135,7 +137,7 @@ userActions.getAll = async (req, res, next) => {
 userActions.getOne = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const user = await User.findOne({
+    let user = await User.findOne({
       where: { id: id },
       include: [
         {
@@ -146,7 +148,7 @@ userActions.getOne = async (req, res, next) => {
         },
       ],
     });
-    res.status(200).json(user);
+    res.status(200).json(User.serialize(user));
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -165,7 +167,7 @@ userActions.updateOne = async (req, res, next) => {
     let updatedUser = await User.findByPk(id);
     await updatedUser.update(req.body);
     await updatedUser.save();
-    res.status(200).json(updatedUser);
+    res.status(200).json(User.serialize(updatedUser));
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
