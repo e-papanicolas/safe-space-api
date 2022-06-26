@@ -1,11 +1,12 @@
 import userActions from "../controllers/user.controller.js";
 import express from "express";
 import auth from "../middleware/auth.js";
+import initialAccess from "../middleware/initialAccess.js";
 
 const userRoutes = express.Router();
 
 // create a new user
-userRoutes.post("/", userActions.new);
+userRoutes.post("/", initialAccess, userActions.new);
 // login an existing user
 userRoutes.post("/login", userActions.login);
 // refresh tokens
