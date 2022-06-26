@@ -34,6 +34,27 @@ const User = sequelize.define(
   {}
 );
 
+/**
+ * @function
+ * This function takes in a user object and returns non sensitive data.
+ * When other fields are associated with the user, add them in here.
+ */
+User.serialize = (user) => {
+  return {
+    id: user.id,
+    username: user.username,
+    email: user.email,
+    Profile: user.Profile,
+    Posts: user.Posts,
+  };
+};
+
+User.serializeMany = (users) => {
+  return users.map((user) => {
+    return User.serialize(user);
+  });
+};
+
 User.associate = (models) => {
   User.hasOne(models.profiles, { foreignKey: "userId" });
   User.hasMany(models.posts, { foreignKey: "userId" });
