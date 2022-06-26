@@ -5,15 +5,21 @@ import auth from "../middleware/auth.js";
 
 const postRoutes = express.Router();
 
-postRoutes.post("/", parser.single("image"), imageUpload, postActions.new);
-postRoutes.get("/:id", postActions.getOne);
-postRoutes.get("/", postActions.getAll);
+postRoutes.post(
+  "/",
+  auth,
+  parser.single("image"),
+  imageUpload,
+  postActions.new
+);
+postRoutes.get("/:id", auth, postActions.getOne);
+postRoutes.get("/", auth, postActions.getAll);
 postRoutes.put(
   "/:id",
   parser.single("image"),
   imageUpload,
   postActions.updateOne
 );
-postRoutes.delete("/:id", postActions.destroyOne);
+postRoutes.delete("/:id", auth, postActions.destroyOne);
 
 export default postRoutes;

@@ -7,6 +7,7 @@ const profileRoutes = express.Router();
 
 profileRoutes.put(
   "/:id",
+  auth,
   parser.single("avatar"),
   avatarUpload,
   profileActions.updateProfile

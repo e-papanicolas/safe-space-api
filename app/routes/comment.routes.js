@@ -4,8 +4,8 @@ import auth from "../middleware/auth.js";
 
 const commentRoutes = express.Router();
 
-commentRoutes.post("/", commentActions.new);
-commentRoutes.get("/:id", commentActions.getOne);
-commentRoutes.delete("/:id", commentActions.destroyOne);
+commentRoutes.post("/", auth, commentActions.new);
+commentRoutes.get("/:id", auth, commentActions.getOne);
+commentRoutes.delete("/:id", auth, commentActions.destroyOne);
 
 export default commentRoutes;
