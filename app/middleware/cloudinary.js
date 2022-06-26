@@ -28,14 +28,18 @@ const parser = multer({ storage: storage });
  * Renames and attaches to the request body for further processing in the controller.
  */
 const avatarUpload = async (req, res, next) => {
-  const avatar = req.file.path;
-  req.body.avatar = avatar;
+  if (req.file) {
+    const avatar = req.file.path;
+    req.body.avatar = avatar;
+  }
   next();
 };
 
 const imageUpload = async (req, res, next) => {
-  const image = req.file.path;
-  req.body.image = image;
+  if (req.file) {
+    const image = req.file.path;
+    req.body.image = image;
+  }
   next();
 };
 
