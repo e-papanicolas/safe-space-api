@@ -27,7 +27,7 @@ profileActions.updateProfile = async (req, res, next) => {
       defaults: profileParams,
     });
     if (created) {
-      return res.status(200).json({ profile });
+      return res.status(200).json(profile);
     } else {
       // it is not newly created, need to update it
       await profile.update(profileParams);
