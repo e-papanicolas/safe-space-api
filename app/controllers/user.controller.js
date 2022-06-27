@@ -165,7 +165,11 @@ userActions.updateOne = async (req, res, next) => {
   try {
     const id = req.params.id;
     let updatedUser = await User.findByPk(id);
-    await updatedUser.update(req.body);
+    await updatedUser.update({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    });
     await updatedUser.save();
     res.status(200).json(User.serialize(updatedUser));
   } catch (err) {
