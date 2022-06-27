@@ -22,6 +22,7 @@ postActions.new = async (req, res, next) => {
       content: req.body.content,
       image: req.body.image,
       userId: req.body.userId,
+      likes: 0,
     });
     res.status(200).json(post);
   } catch (err) {
@@ -87,7 +88,12 @@ postActions.updateOne = async (req, res, next) => {
   try {
     const id = req.params.id;
     let updatedPost = await Post.findByPk(id);
-    await updatedPost.update(req.body);
+    await updatedPost.update({
+      content: req.body.content,
+      image: req.body.image,
+      userId: req.body.userId,
+      likes: req.body.likes,
+    });
     await updatedPost.save();
     res.status(200).json(updatedPost);
   } catch (err) {
