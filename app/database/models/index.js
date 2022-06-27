@@ -4,6 +4,7 @@ import User from "./user.model.js";
 import Profile from "./profile.model.js";
 import Post from "./post.model.js";
 import Comment from "./comment.model.js";
+import Report from "./report.model.js";
 
 const sequelize = new Sequelize(
   config.development.database,
@@ -18,6 +19,7 @@ db.users = User;
 db.profiles = Profile;
 db.posts = Post;
 db.comments = Comment;
+db.reports = Report;
 
 // test the connection to the database
 try {
