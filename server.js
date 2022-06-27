@@ -9,6 +9,7 @@ import {
   profileRoutes,
   commentRoutes,
   postRoutes,
+  reportRoutes,
 } from "./app/routes/index.js";
 
 const app = express();
@@ -25,6 +26,7 @@ app.use("/user", userRoutes);
 app.use("/profile", profileRoutes);
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
+app.use("/report", reportRoutes);
 
 // * change cors configuration to this when running with a front end
 // const corsOptions = {origin: "http://localhost:____"};
