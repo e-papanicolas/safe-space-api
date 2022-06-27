@@ -36,7 +36,6 @@ postActions.new = async (req, res, next) => {
  * @function
  * Returns all posts associated with the userId.
  */
-// TODO: figure out how to get the nested Post.Comments
 postActions.getOne = async (req, res, next) => {
   const id = req.params.id;
   try {
@@ -45,6 +44,7 @@ postActions.getOne = async (req, res, next) => {
       include: [
         {
           model: Post,
+          include: [{ model: Comment }],
         },
       ],
     });

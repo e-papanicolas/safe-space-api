@@ -13,4 +13,8 @@ profileRoutes.put(
   profileActions.updateProfile
 );
 
+profileRoutes.get("/tags", auth, profileActions.getTags);
+
+profileRoutes.post("/add_tags", auth, profileActions.addTags);
+
 export default profileRoutes;

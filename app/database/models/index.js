@@ -5,6 +5,8 @@ import Profile from "./profile.model.js";
 import Post from "./post.model.js";
 import Comment from "./comment.model.js";
 import Report from "./report.model.js";
+import Tag from "./tag.model.js";
+import ProfileTag from "./profiletag.model.js";
 
 const sequelize = new Sequelize(
   config.development.database,
@@ -20,6 +22,8 @@ db.profiles = Profile;
 db.posts = Post;
 db.comments = Comment;
 db.reports = Report;
+db.tags = Tag;
+db.profileTags = ProfileTag;
 
 // test the connection to the database
 try {
