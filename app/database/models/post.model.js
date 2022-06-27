@@ -25,9 +25,7 @@ const Post = sequelize.define(
     },
     userId: {
       type: DataTypes.INTEGER,
-      validate: {
-        // allowNull: false,
-      },
+      allowNull: false,
     },
   },
   {}
