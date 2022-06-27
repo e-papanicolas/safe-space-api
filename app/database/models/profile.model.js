@@ -27,6 +27,7 @@ Profile.associate = (models) => {
     foreignKey: "userId",
     onDelete: "CASCADE",
   });
+  Profile.hasMany(models.profileTags, { foreignKey: "profileId" });
 };
 
 export default Profile;
