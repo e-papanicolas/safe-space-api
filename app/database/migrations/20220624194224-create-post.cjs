@@ -14,6 +14,9 @@ module.exports = {
       image: {
         type: Sequelize.STRING,
       },
+      likes: {
+        type: Sequelize.INTEGER,
+      },
       userId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",

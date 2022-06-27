@@ -20,6 +20,9 @@ const Post = sequelize.define(
     image: {
       type: DataTypes.STRING,
     },
+    likes: {
+      type: DataTypes.INTEGER,
+    },
     userId: {
       type: DataTypes.INTEGER,
       validate: {
