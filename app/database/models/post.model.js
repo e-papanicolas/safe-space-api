@@ -12,7 +12,7 @@ const Post = sequelize.define(
   "Post",
   {
     content: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       validate: {
         notEmpty: true,
       },
