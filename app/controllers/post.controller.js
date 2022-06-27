@@ -14,7 +14,7 @@ const postActions = {};
 postActions.new = async (req, res, next) => {
   // validate request
   if (!req.body.userId) {
-    res.status(400).json({ message: "Fields cannot be empty" });
+    return res.status(400).json({ message: "Post must have a userId." });
   }
   try {
     // create new instance and save
