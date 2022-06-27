@@ -11,6 +11,7 @@ import { db } from "../database/models/index.js";
 const User = db.users;
 const Profile = db.profiles;
 const Post = db.posts;
+const ProfileTag = db.profileTags;
 const userActions = {};
 
 /**
@@ -142,6 +143,7 @@ userActions.getOne = async (req, res, next) => {
       include: [
         {
           model: Profile,
+          include: [{ model: ProfileTag }],
         },
         {
           model: Post,
