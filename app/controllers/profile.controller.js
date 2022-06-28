@@ -13,7 +13,7 @@ const profileActions = {};
  */
 profileActions.updateProfile = async (req, res, next) => {
   const userId = req.params.userId;
-  const {
+  let {
     avatar,
     nickname,
     pronouns,
@@ -22,17 +22,6 @@ profileActions.updateProfile = async (req, res, next) => {
     about,
     interests,
   } = req.body;
-
-  // string: space separated list of tag ids
-  // validates the tags to be made after profile is created, because we need profile id
-  let tagIds = [];
-  const validateTags = (interests) => {
-    let ids = interests.toString().split(" ");
-    for (let id of ids) {
-      tagIds.push(parseInt(id));
-    }
-  };
-  validateTags(interests);
 
   const profileParams = {
     userId: userId,
@@ -65,15 +54,16 @@ profileActions.updateProfile = async (req, res, next) => {
 
     // takes the array of tag ids validated from the req.interests
     // creates a ProfileTag for each, which is returned with the user.
+    interests = Array.from(JSON.parse(interests));
     const createPTs = async (arrOfIds) => {
-      tagIds.forEach(async (tagId) => {
+      arrOfIds.forEach(async (tagId) => {
         await ProfileTag.create({
           profileId: profile.id,
           tagId: tagId,
         });
       });
     };
-    createPTs(tagIds);
+    await createPTs(interests);
 
     res.status(200).json(profile);
   } catch (err) {
