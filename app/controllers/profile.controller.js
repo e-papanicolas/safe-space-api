@@ -6,37 +6,40 @@ const ProfileTag = db.profileTags;
 const profileActions = {};
 
 /**
- * PUT /:id
+ * PUT /:userId
  * @param {integer} id - user id
  * @function
  * Returns the user's profile.
  */
 profileActions.updateProfile = async (req, res, next) => {
-  const id = req.params.id;
+  const userId = req.params.userId;
   const {
     avatar,
     nickname,
     pronouns,
-    countryOfOrigin,
+    countryofOrigin,
     currentLocation,
     about,
     interests,
   } = req.body;
+
   // string: space separated list of tag ids
-  let tagIds = interests.split(" ");
-  await tagIds.forEach(async (tagId) => {
-    return await ProfileTag.create({
-      profileId: id,
-      tagId: tagId,
-    });
-  });
+  // validates the tags to be made after profile is created, because we need profile id
+  let tagIds = [];
+  const validateTags = (interests) => {
+    let ids = interests.split(" ");
+    for (let id of ids) {
+      tagIds.push(parseInt(id));
+    }
+  };
+  validateTags(interests);
 
   const profileParams = {
-    userId: id,
+    userId: userId,
     avatar,
     nickname,
     pronouns,
-    countryOfOrigin,
+    countryofOrigin,
     currentLocation,
     about,
     interests,
@@ -44,7 +47,7 @@ profileActions.updateProfile = async (req, res, next) => {
 
   try {
     let [profile, created] = await Profile.findOrCreate({
-      where: { userId: id },
+      where: { userId: userId },
       defaults: profileParams,
       include: [
         {
@@ -59,6 +62,18 @@ profileActions.updateProfile = async (req, res, next) => {
       await profile.update(profileParams);
       await profile.save();
     }
+
+    // takes the array of tag ids validated from the req.interests
+    // creates a ProfileTag for each, which is returned with the user.
+    const createPTs = async (arrOfIds) => {
+      tagIds.forEach(async (tagId) => {
+        await ProfileTag.create({
+          profileId: profile.id,
+          tagId: tagId,
+        });
+      });
+    };
+    createPTs(tagIds);
 
     res.status(200).json(profile);
   } catch (err) {
