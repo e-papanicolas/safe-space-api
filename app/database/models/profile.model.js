@@ -17,7 +17,7 @@ const Profile = sequelize.define(
     countryOfOrigin: DataTypes.STRING,
     currentLocation: DataTypes.STRING,
     about: DataTypes.STRING,
-    interests: DataTypes.STRING,
+    interests: DataTypes.ARRAY(DataTypes.INTEGER),
     userId: DataTypes.INTEGER,
   },
   {}

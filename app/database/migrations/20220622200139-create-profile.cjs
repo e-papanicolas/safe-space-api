@@ -37,7 +37,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       interests: {
-        type: Sequelize.STRING,
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
       },
       createdAt: {
         allowNull: false,
