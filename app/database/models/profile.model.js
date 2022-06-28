@@ -14,7 +14,7 @@ const Profile = sequelize.define(
     avatar: DataTypes.STRING,
     nickname: DataTypes.STRING,
     pronouns: DataTypes.STRING,
-    countryOfOrigin: DataTypes.STRING,
+    countryofOrigin: DataTypes.STRING,
     currentLocation: DataTypes.STRING,
     about: DataTypes.STRING,
     interests: DataTypes.STRING,
