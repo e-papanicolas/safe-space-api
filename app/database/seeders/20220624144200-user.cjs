@@ -14,6 +14,7 @@ module.exports = {
           username: "John_Doe",
           email: "john@doe.com",
           password: "password",
+          isAdmin: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

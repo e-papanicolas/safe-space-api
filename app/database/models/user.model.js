@@ -30,8 +30,14 @@ const User = sequelize.define(
         len: [3 - 18],
       },
     },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
-  
+  {}
+);
+
 /**
  * @function
  * This function takes in a user object and returns non sensitive data.
@@ -57,14 +63,6 @@ User.associate = (models) => {
   User.hasOne(models.profiles, { foreignKey: "userId" });
   User.hasMany(models.posts, { foreignKey: "userId" });
   User.hasMany(models.comments, { foreignKey: "userId" });
-  User.belongsToMany(models.tags, { through: "UserTags" });
 };
-
-//  ! this has the has many through
-// User.associate = (models) => {
-//   User.hasOne(models.profiles, { foreignKey: "userId" });
-//   User.hasMany(models.posts, { foreignKey: "userId" });
-//   User.hasMany(models.comments, { foreignKey: "userId", through: "Posts" });
-// };
 
 export default User;
