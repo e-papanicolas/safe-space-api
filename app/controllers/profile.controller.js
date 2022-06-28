@@ -27,7 +27,7 @@ profileActions.updateProfile = async (req, res, next) => {
   // validates the tags to be made after profile is created, because we need profile id
   let tagIds = [];
   const validateTags = (interests) => {
-    let ids = interests.split(" ");
+    let ids = (interests || "").split(" ");
     for (let id of ids) {
       tagIds.push(parseInt(id));
     }
