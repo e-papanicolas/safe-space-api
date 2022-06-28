@@ -27,7 +27,7 @@ module.exports = {
       pronouns: {
         type: Sequelize.STRING,
       },
-      countryofOrigin: {
+      countryOfOrigin: {
         type: Sequelize.STRING,
       },
       currentLocation: {
