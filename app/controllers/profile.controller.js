@@ -13,7 +13,15 @@ const profileActions = {};
  */
 profileActions.updateProfile = async (req, res, next) => {
   const id = req.params.id;
-  const { avatar, nickname, pronouns, country, about, interests } = req.body;
+  const {
+    avatar,
+    nickname,
+    pronouns,
+    countryOfOrigin,
+    currentLocation,
+    about,
+    interests,
+  } = req.body;
   // string: space separated list of tag ids
   let tagIds = interests.split(" ");
   await tagIds.forEach(async (tagId) => {
@@ -28,7 +36,8 @@ profileActions.updateProfile = async (req, res, next) => {
     avatar,
     nickname,
     pronouns,
-    country,
+    countryOfOrigin,
+    currentLocation,
     about,
     interests,
   };
