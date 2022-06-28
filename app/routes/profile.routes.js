@@ -6,7 +6,7 @@ import profileActions from "../controllers/profile.controller.js";
 const profileRoutes = express.Router();
 
 profileRoutes.put(
-  "/:id",
+  "/:userId",
   auth,
   parser.single("avatar"),
   avatarUpload,
