@@ -54,16 +54,18 @@ profileActions.updateProfile = async (req, res, next) => {
 
     // takes the array of tag ids validated from the req.interests
     // creates a ProfileTag for each, which is returned with the user.
-    interests = Array.from(JSON.parse(interests));
-    const createPTs = async (arrOfIds) => {
-      arrOfIds.forEach(async (tagId) => {
-        await ProfileTag.create({
-          profileId: profile.id,
-          tagId: tagId,
+    if (interests.length > 0) {
+      interests = Array.from(JSON.parse(interests));
+      const createPTs = async (arrOfIds) => {
+        arrOfIds.forEach(async (tagId) => {
+          await ProfileTag.create({
+            profileId: profile.id,
+            tagId: tagId,
+          });
         });
-      });
-    };
-    await createPTs(interests);
+      };
+      await createPTs(interests);
+    }
 
     res.status(200).json(profile);
   } catch (err) {
