@@ -39,6 +39,7 @@ userActions.new = async (req, res, next) => {
       username: req.body.username,
       email: req.body.email,
       password: pswd,
+      isAdmin: req.body.isAdmin,
     });
     await newUser.save();
     console.log(newUser);
@@ -102,14 +103,14 @@ userActions.login = async (req, res, next) => {
  * Returns the new user, JWT tokens and refresh tokens.
  */
 userActions.tokenRefresh = async (req, res, next) => {
+  console.log(req.body);
   const data = req.body;
   if (data.refreshToken && data.refreshToken in refreshList) {
     const decoded = jwt.verify(data.refreshToken, process.env.JWT_R_KEY);
     const token = generateAccessToken(decoded.user);
     const refreshToken = generateRefreshToken(decoded.user);
     addTokenToList(refreshToken, token);
-    let user = User.serialize(decoded.user);
-    res.status(200).json({ user, token, refreshToken });
+    res.status(200).json({ token, refreshToken });
   } else {
     res.status(401).json({ message: "Invalid refresh token" });
   }
