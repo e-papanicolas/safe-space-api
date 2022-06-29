@@ -48,6 +48,7 @@ User.serialize = (user) => {
     id: user.id,
     username: user.username,
     email: user.email,
+    isAdmin: user.isAdmin,
     Profile: user.Profile,
     Posts: user.Posts,
   };
