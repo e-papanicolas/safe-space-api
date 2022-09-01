@@ -1,5 +1,5 @@
 <div id="top"></div>
-
+<div align="center">
 <!-- PROJECT SHIELDS -->
 
 [![Contributors][contributors-shield]][contributors-url]
@@ -10,7 +10,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
+
   <!-- <a href="https://github.com/e-papanicolas/safe-space-api">
     <img src="" alt="Logo" width="80" height="80">
   </a> -->
