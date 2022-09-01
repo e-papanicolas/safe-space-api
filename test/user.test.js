@@ -6,7 +6,7 @@ import app from "../server.js";
 chai.should();
 chai.use(chaiHttp);
 
-describe("User Integration Tests", () => {
+describe("User Unit Tests", () => {
   describe("POST /user", () => {
     it("should post a new user", (done) => {
       let payload = {
@@ -85,10 +85,4 @@ describe("User Integration Tests", () => {
         });
     });
   });
-
-  describe("POST /user/login", () => {});
-
-  describe("PUT /user/:id", () => {});
-
-  describe("DELETE /user/:id", () => {});
 });
