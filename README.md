@@ -117,5 +117,5 @@
 [license-url]: https://github.com/e-papanicolas/safe-space-api/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/elenipapanicolas/
-[product-screenshot]: ./public/images/safeplaceinternational.png
+[product-screenshot]: ./public/images/safeplaceinternational_login.png
 [longterm-screenshot]: ./public/images/futuregoals.png
