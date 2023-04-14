@@ -27,7 +27,7 @@
   "homepage": "https://github.com/e-papanicolas/pride-equalithon#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "chai": "^4.3.6",
+    "chai": "^4.3.7",
     "chai-http": "^4.3.0",
     "cloudinary": "^1.35.0",
     "cookie-parser": "^1.4.6",
